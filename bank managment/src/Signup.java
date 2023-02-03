@@ -1,18 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Signup extends JFrame {
+public class Signup extends JFrame implements ActionListener {
+    long no;
+    JTextField nameTextField, surnameTextField, birthdayTextField, emailTextField, addressTextField, cityTextField;
+    JButton next;
+    JRadioButton male, female;
+    JPasswordField pinTextField;
 
     Signup() {
 
         setLayout(null);
 
         Random ran = new Random();
-        long no = Math.abs((ran.nextLong() % 9000L) + 1000L);
-
+        no = Math.abs((ran.nextLong() % 9000L) + 1000L);
 
         JLabel formno = new JLabel("ЗАЯВЛЕНИЕ № : " + no);
         formno.setFont(new Font("Raleway", Font.BOLD, 38));
@@ -29,7 +33,7 @@ public class Signup extends JFrame {
         name.setBounds(100, 140, 150, 30);
         add(name);
 
-        JTextField nameTextField = new JTextField();
+        nameTextField = new JTextField();
         nameTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         nameTextField.setBounds(300, 140, 400, 30);
         add(nameTextField);
@@ -39,7 +43,7 @@ public class Signup extends JFrame {
         surname.setBounds(100, 190, 150, 30);
         add(surname);
 
-        JTextField surnameTextField = new JTextField();
+        surnameTextField = new JTextField();
         surnameTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         surnameTextField.setBounds(300, 190, 400, 30);
         add(surnameTextField);
@@ -49,7 +53,7 @@ public class Signup extends JFrame {
         birthday.setBounds(100, 240, 200, 30);
         add(birthday);
 
-        JTextField birthdayTextField = new JTextField();
+        birthdayTextField = new JTextField();
         birthdayTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         birthdayTextField.setBounds(300, 240, 400, 30);
         add(birthdayTextField);
@@ -59,12 +63,12 @@ public class Signup extends JFrame {
         gender.setBounds(100, 290, 200, 30);
         add(gender);
 
-        JRadioButton male = new JRadioButton("Мужчина");
+        male = new JRadioButton("Мужчина");
         male.setBounds(300, 290, 100, 30);
         male.setBackground(Color.WHITE);
         add(male);
 
-        JRadioButton female = new JRadioButton("Женщина");
+        female = new JRadioButton("Женщина");
         female.setBounds(400, 290, 100, 30);
         female.setBackground(Color.WHITE);
         add(female);
@@ -73,13 +77,12 @@ public class Signup extends JFrame {
         gendergroup.add(male);
         gendergroup.add(female);
 
-
         JLabel email = new JLabel("Почта :");
         email.setFont(new Font("Raleway", Font.BOLD, 22));
         email.setBounds(100, 340, 200, 30);
         add(email);
 
-        JTextField emailTextField = new JTextField();
+        emailTextField = new JTextField();
         emailTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         emailTextField.setBounds(300, 340, 400, 30);
         add(emailTextField);
@@ -89,17 +92,17 @@ public class Signup extends JFrame {
         adress.setBounds(100, 390, 200, 30);
         add(adress);
 
-        JTextField adressTextField = new JTextField();
-        adressTextField.setFont(new Font("Raleway", Font.BOLD, 20));
-        adressTextField.setBounds(300, 390, 400, 30);
-        add(adressTextField);
+        addressTextField = new JTextField();
+        addressTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        addressTextField.setBounds(300, 390, 400, 30);
+        add(addressTextField);
 
         JLabel city = new JLabel("Город :");
         city.setFont(new Font("Raleway", Font.BOLD, 22));
         city.setBounds(100, 440, 200, 30);
         add(city);
 
-        JTextField cityTextField = new JTextField();
+        cityTextField = new JTextField();
         cityTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         cityTextField.setBounds(300, 440, 400, 30);
         add(cityTextField);
@@ -109,15 +112,16 @@ public class Signup extends JFrame {
         pin.setBounds(100, 490, 200, 30);
         add(pin);
 
-        JTextField pinTextField = new JTextField();
+        pinTextField = new JPasswordField();
         pinTextField.setFont(new Font("Raleway", Font.BOLD, 20));
         pinTextField.setBounds(300, 490, 400, 30);
         add(pinTextField);
 
-        JButton next = new JButton("Next");
+        next = new JButton("Next");
         next.setBounds(600, 550, 100, 30);
         next.setBackground(Color.black);
         next.setForeground(Color.white);
+        next.addActionListener(this);
         add(next);
 
         getContentPane().setBackground(Color.white);
@@ -125,14 +129,41 @@ public class Signup extends JFrame {
         setSize(850, 850);
         setLocation(350, 10);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String formno = "" + no; //long
+        String name = nameTextField.getText(); //setText
+        String surname = surnameTextField.getText();
+        String birthday = birthdayTextField.getText();
+        String gender = null;
+        if (male.isSelected()) {
+            gender = "Мужчина";
+        } else if (female.isSelected()) {
+            gender = "Женщина";
+        }
+        String email = emailTextField.getText();
+        String address = addressTextField.getText();
+        String city = cityTextField.getText();
+        String pin = pinTextField.getText();
+
+        try {
+            if (name.equals("")) {
+                JOptionPane.showMessageDialog(null, "Имя должен.");
+            } else {
+                Conn c = new Conn();
+                String query = "insert into signup values ('" + formno + "', '" + name + "', '" + surname + "', '" + birthday + "','" + gender + "','" + email + "','" + address + "','" + city + "','" + pin + "')";
+                c.s.executeUpdate(query);
+            }
+        } catch (Exception ae) {
+            System.out.println(ae);
+        }
 
 
     }
 
     public static void main(String[] args) {
-
         new Signup();
     }
-
 }
-
