@@ -30,8 +30,8 @@ public class Signup extends JFrame {
         add(name);
 
         JTextField nameTextField = new JTextField();
-        nameTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        nameTextField.setBounds(300,140,400,30);
+        nameTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        nameTextField.setBounds(300, 140, 400, 30);
         add(nameTextField);
 
         JLabel surname = new JLabel("Фамилия :");
@@ -40,8 +40,8 @@ public class Signup extends JFrame {
         add(surname);
 
         JTextField surnameTextField = new JTextField();
-        surnameTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        surnameTextField.setBounds(300,190,400,30);
+        surnameTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        surnameTextField.setBounds(300, 190, 400, 30);
         add(surnameTextField);
 
         JLabel birthday = new JLabel("День рождения :");
@@ -50,8 +50,8 @@ public class Signup extends JFrame {
         add(birthday);
 
         JTextField birthdayTextField = new JTextField();
-        birthdayTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        birthdayTextField.setBounds(300,240,400,30);
+        birthdayTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        birthdayTextField.setBounds(300, 240, 400, 30);
         add(birthdayTextField);
 
         JLabel gender = new JLabel("Пол :");
@@ -60,12 +60,12 @@ public class Signup extends JFrame {
         add(gender);
 
         JRadioButton male = new JRadioButton("Мужчина");
-        male.setBounds(300,290,100,30);
+        male.setBounds(300, 290, 100, 30);
         male.setBackground(Color.WHITE);
         add(male);
 
         JRadioButton female = new JRadioButton("Женщина");
-        female.setBounds(400,290,100,30);
+        female.setBounds(400, 290, 100, 30);
         female.setBackground(Color.WHITE);
         add(female);
 
@@ -80,8 +80,8 @@ public class Signup extends JFrame {
         add(email);
 
         JTextField emailTextField = new JTextField();
-        emailTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        emailTextField.setBounds(300,340,400,30);
+        emailTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        emailTextField.setBounds(300, 340, 400, 30);
         add(emailTextField);
 
         JLabel adress = new JLabel("Адрес :");
@@ -90,8 +90,8 @@ public class Signup extends JFrame {
         add(adress);
 
         JTextField adressTextField = new JTextField();
-        adressTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        adressTextField.setBounds(300,390,400,30);
+        adressTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        adressTextField.setBounds(300, 390, 400, 30);
         add(adressTextField);
 
         JLabel city = new JLabel("Город :");
@@ -100,8 +100,8 @@ public class Signup extends JFrame {
         add(city);
 
         JTextField cityTextField = new JTextField();
-        cityTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        cityTextField.setBounds(300,440,400,30);
+        cityTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        cityTextField.setBounds(300, 440, 400, 30);
         add(cityTextField);
 
         JLabel pin = new JLabel("Пин Код :");
@@ -110,12 +110,12 @@ public class Signup extends JFrame {
         add(pin);
 
         JTextField pinTextField = new JTextField();
-        pinTextField.setFont(new Font("Raleway", Font.BOLD,20));
-        pinTextField.setBounds(300,490,400,30);
+        pinTextField.setFont(new Font("Raleway", Font.BOLD, 20));
+        pinTextField.setBounds(300, 490, 400, 30);
         add(pinTextField);
 
         JButton next = new JButton("Next");
-        next.setBounds(600, 550, 100,30);
+        next.setBounds(600, 550, 100, 30);
         next.setBackground(Color.black);
         next.setForeground(Color.white);
         add(next);
