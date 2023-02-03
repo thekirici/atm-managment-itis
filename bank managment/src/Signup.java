@@ -160,6 +160,11 @@ public class Signup extends JFrame implements ActionListener {
             System.out.println(ae);
         }
 
+        if (e.getSource() == next) {
+            setVisible(false);
+            new SignupEnd();
+        }
+
 
     }
 

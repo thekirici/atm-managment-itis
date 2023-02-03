@@ -45,21 +45,21 @@ public class Login extends JFrame implements ActionListener {
         pinTextField.setFont(new Font("Arial", Font.BOLD, 18));
         add(pinTextField);
 
-        login = new JButton("SIGN IN");
+        login = new JButton("Войти");
         login.setBounds(240, 230, 90, 35);
         login.setBackground(Color.BLACK);
         login.setForeground(Color.WHITE);
         login.addActionListener(this);
         add(login);
 
-        clear = new JButton("CLEAR");
+        clear = new JButton("Очистить");
         clear.setBounds(360, 230, 90, 35);
         clear.setBackground(Color.BLACK);
         clear.setForeground(Color.WHITE);
         clear.addActionListener(this);
         add(clear);
 
-        signup = new JButton("SIGN UP");
+        signup = new JButton("Зарегистрироваться");
         signup.setBounds(240, 280, 210, 35);
         signup.setBackground(Color.BLACK);
         signup.setForeground(Color.WHITE);
@@ -68,9 +68,9 @@ public class Login extends JFrame implements ActionListener {
 
         getContentPane().setBackground(Color.WHITE);
 
-        setSize(600, 480);
+        setSize(850, 850);
+        setLocation(350, 10);
         setVisible(true);
-        setLocation(300, 300);
     }
 
     public static void main(String args[]) {
@@ -85,7 +85,8 @@ public class Login extends JFrame implements ActionListener {
         } else if (e.getSource() == login) {
 
         } else if (e.getSource() == signup) {
-
+            setVisible(false);
+            new Signup().setVisible(true);
         }
 
     }
