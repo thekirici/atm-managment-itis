@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
 
     JButton login, signup, clear;
     JTextField cardTextField;
-    JPasswordField pinTextField;
+    JPasswordField pinPasswField;
 
     Login() {
         setTitle("ATM");
@@ -40,10 +41,10 @@ public class Login extends JFrame implements ActionListener {
         pin.setBounds(80, 170, 400, 30);
         add(pin);
 
-        pinTextField = new JPasswordField();
-        pinTextField.setBounds(240, 170, 210, 30);
-        pinTextField.setFont(new Font("Arial", Font.BOLD, 18));
-        add(pinTextField);
+        Login.this.pinPasswField = new JPasswordField();
+        Login.this.pinPasswField.setBounds(240, 170, 210, 30);
+        Login.this.pinPasswField.setFont(new Font("Arial", Font.BOLD, 18));
+        add(Login.this.pinPasswField);
 
         login = new JButton("Войти");
         login.setBounds(240, 230, 90, 35);
@@ -81,8 +82,26 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == clear) {
             cardTextField.setText("");
-            pinTextField.setText("");
+            Login.this.pinPasswField.setText("");
         } else if (e.getSource() == login) {
+
+            Conn conn = new Conn();
+            String cardnumber = cardTextField.getText();
+            String pinnumber = pinPasswField.getText();
+            String query = "select * from encryption where cardnumber = '" + cardnumber + "' and pinnumber = '" + pinnumber + "'";
+
+            try {
+                ResultSet rs = conn.s.executeQuery(query);
+                if (rs.next()) {
+                    setVisible(false);
+                    new Transactions(pinnumber).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error incorrect pin or card number.");
+                }
+
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
 
         } else if (e.getSource() == signup) {
             setVisible(false);
