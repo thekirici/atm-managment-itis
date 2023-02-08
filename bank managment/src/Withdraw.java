@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class Deposit extends JFrame implements ActionListener {
+public class Withdraw extends JFrame implements ActionListener {
     JTextField amount;
-    JButton deposit, exit, back;
+    JButton withdraw, exit, back;
     String pinnumber;
-    Deposit(String pinnumber) {
+    Withdraw(String pinnumber) {
         this.pinnumber = pinnumber;
 
 
@@ -33,11 +33,11 @@ public class Deposit extends JFrame implements ActionListener {
         image.add(amount);
         image.add(amount);
 
-        deposit = new JButton("Депозит");
-        deposit.setBounds(465, 420, 160, 50);
-        deposit.setBackground(Color.white);
-        deposit.addActionListener(this);
-        image.add(deposit);
+        withdraw = new JButton("Cнять");
+        withdraw.setBounds(465, 420, 160, 50);
+        withdraw.setBackground(Color.white);
+        withdraw.addActionListener(this);
+        image.add(withdraw);
 
         back = new JButton("Back");
         back.setBounds(285, 485, 160, 50);
@@ -58,19 +58,19 @@ public class Deposit extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Deposit("");
+        new Withdraw("");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == deposit) {
+        if (e.getSource() == withdraw) {
             String number = amount.getText();
             Date date = new Date();
             try {
                 Conn c = new Conn();
-                String query = "insert into bank values ( '"+pinnumber+"', '"+date+"', 'Deposit', '"+number+"')";
+                String query = "insert into bank values ( '"+pinnumber+"', '"+date+"', 'Withdraw', '"+number+"')";
                 c.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null,"Успешно внесли "+number+" рублей.");
+                JOptionPane.showMessageDialog(null,number + "Успешно сняли "+number+" рублей.");
                 setVisible(false);
             } catch (Exception exception) {
                 System.out.println(exception);
