@@ -12,6 +12,8 @@ public class FastCash extends JFrame implements ActionListener {
 
     FastCash(String pinnumber) {
         this.pinnumber = pinnumber;
+        setLayout(null);
+
 
         ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icons/atm.png"));
         Image img2 = img.getImage().getScaledInstance(900, 900, Image.SCALE_DEFAULT);
@@ -89,29 +91,29 @@ public class FastCash extends JFrame implements ActionListener {
             new Transactions(pinnumber).setVisible(true);
 
         } else {
-            String amount = ((JButton)e.getSource()).getText().replaceAll("\\s", "").replaceAll("руб","");
+            String amount = ((JButton) e.getSource()).getText().replaceAll("\\s", "").replaceAll("руб", "");
             Conn c = new Conn();
             try {
-                ResultSet rs = c.s.executeQuery("SELECT * from bank where pinnumber ='"+pinnumber+"'");
+                ResultSet rs = c.s.executeQuery("SELECT * from bank where pinnumber ='" + pinnumber + "'");
                 int balance = 0;
-                while (rs.next()){
-                    if (rs.getString("type").equals("Deposit")){
+                while (rs.next()) {
+                    if (rs.getString("type").equals("Deposit")) {
                         balance += Integer.parseInt(rs.getString("amount"));
-                    }else {
+                    } else {
                         balance -= Integer.parseInt(rs.getString("amount"));
                     }
                 }
-                if (e.getSource() != exit && balance < Integer.parseInt(amount)){
+                if (e.getSource() != exit && balance < Integer.parseInt(amount)) {
                     JOptionPane.showMessageDialog(null, "Insufficient Balance");
                     return;
                 }
                 Date date = new Date();
-                String query = "insert into bank values ('"+pinnumber+"', '"+date+"', 'Withdraw', '"+amount+"')";
+                String query = "insert into bank values ('" + pinnumber + "', '" + date + "', 'Withdraw', '" + amount + "')";
                 c.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Успешно сняли" +amount+ "рублей.");
+                JOptionPane.showMessageDialog(null, "Успешно сняли" + amount + "рублей.");
                 setVisible(false);
                 new Transactions(pinnumber).setVisible(true);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
