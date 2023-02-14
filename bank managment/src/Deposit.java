@@ -72,6 +72,7 @@ public class Deposit extends JFrame implements ActionListener {
                 c.s.executeUpdate(query);
                 JOptionPane.showMessageDialog(null,"Успешно внесли "+number+" рублей.");
                 setVisible(false);
+                new Transactions(pinnumber).setVisible(true);
             } catch (Exception exception) {
                 System.out.println(exception);
             }
